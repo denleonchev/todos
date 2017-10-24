@@ -1,22 +1,28 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
 import FilterLink from './FilterLink';
 
-const Footer = () => (
-  <p>
-    Show:
-    {" "}
-    <FilterLink filter="SHOW_ALL">
-      All
-    </FilterLink>
-    {", "}
-    <FilterLink filter="SHOW_ACTIVE">
-      Active
-    </FilterLink>
-    {", "}
-    <FilterLink filter="SHOW_COMPLETED">
-      Completed
-    </FilterLink>
-  </p>
-);
+const Footer = ({ match }) => {
+  const { filter } = match.params;
+  console.log(filter)
+  return (
+    <p>
+      Show:
+      {" "}
+      <FilterLink filter="" active={filter === undefined}>
+        All
+      </FilterLink>
+      {", "}
+      <FilterLink filter="active" active={filter === 'active'}>
+        Active
+      </FilterLink>
+      {", "}
+      <FilterLink filter="completed" active={filter === 'completed'}>
+        Completed
+      </FilterLink>
+    </p>
+  )
+};
 
-export default Footer;
+export default withRouter(Footer);
