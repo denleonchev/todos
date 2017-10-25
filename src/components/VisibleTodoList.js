@@ -17,23 +17,16 @@ const getVisibleTodos = (todos, filter) => {
 };
 
 const mapStateToProps = (state, { match }) => {
-  const { filter } = match.params;
+  const { currentFilter } = match.params;
   return {
-    todos: getVisibleTodos(state.todos, filter || 'all'),
+    todos: getVisibleTodos(state.todos, currentFilter || 'all'),
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onTodoClick: (id) => {
-      dispatch(toggleTodo(id));
-    },
-  };
-};
 
 const VisibleTodoList = withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps
+  {onTodoClick: toggleTodo}
 )(TodoList));
 
 export default VisibleTodoList;

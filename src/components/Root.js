@@ -7,7 +7,7 @@ import App from './App';
 const Root = ({ store }) => (
     <Provider store={store}>
         <Router>
-            <Route path="/:filter?" render={(props) => {
+            <Route path="/:currentFilter?" render={(props) => {
                 return (
                     <App />
                 );

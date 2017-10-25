@@ -1,19 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { setVisibilityFilter } from '../actions';
+import { withRouter } from 'react-router-dom';
 
-const FilterLink = ({children, filter, active}) => {
-  if (active) {
-    return(
-      <span>{children}</span>
-    )
-  }
+import Link from './Link';
+
+const FilterLink = ({children, filter, match}) => {
+  const { currentFilter = '' } = match.params;
   return (
-    <Link to={"/" + filter}>
+    <Link filter={filter} active={currentFilter === filter}>
       {children}
     </Link>
   )
 }
 
-export default FilterLink;
+export default withRouter(FilterLink);
